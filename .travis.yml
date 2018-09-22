@@ -1,20 +1,21 @@
+dist: trusty
+sudo: required
 language: go
 
 go:
-  - 1.8.x
-
-env:
-  - GO_ENV=test
-
-
-
-before_script:
-  - mkdir -p $TRAVIS_BUILD_DIR/public/assets
+  - 1.11.x
 
 go_import_path: github.com/openware/barong
 
-install:
-  - go get github.com/gobuffalo/buffalo/buffalo
-  - go get $(go list ./... | grep -v /vendor/)
+env:
+  - GO_ENV=test
+    GO111MODULE=on
 
-script: buffalo test
+before_script:
+  - mkdir -p $TRAVIS_BUILD_DIR/public/assets
+  - GO111MODULE=off go get github.com/gobuffalo/buffalo/buffalo
+
+install: true
+
+script:
+  - buffalo test

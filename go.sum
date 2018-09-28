@@ -1,0 +1,14 @@
+github.com/alexflint/go-arg v0.0.0-20180516182405-f7c0423bd11e h1:dzrBxLIjiq17Da9DhY3svGRhptiUg1LUzdkOuFYjAzA=
+github.com/alexflint/go-arg v0.0.0-20180516182405-f7c0423bd11e/go.mod h1:PHxo6ZWOLVMZZgWSAqBynb/KhIqoGO6WKwOVX7rM9dg=
+github.com/alexflint/go-scalar v0.0.0-20170216020425-e80c3b7ed292 h1:0YTMOir1UPjebSvNmIrEKO9FFd+RZc1wwZHUrxfn4BI=
+github.com/alexflint/go-scalar v0.0.0-20170216020425-e80c3b7ed292/go.mod h1:dgifnFPveotJNpwJdl1hDPu5vSuqVVUPIr3isfcvgBA=
+github.com/go-chi/chi v3.3.3+incompatible h1:KHkmBEMNkwKuK4FdQL7N2wOeB9jnIx7jR5wsuSBEFI8=
+github.com/go-chi/chi v3.3.3+incompatible/go.mod h1:eB3wogJHnLi3x/kFX2A+IbTBlXxmMeXJVKy9tTv1XzQ=
+github.com/kovetskiy/lorg v0.0.0-20180923120717-7c1ee0acf180 h1:S6Fn3OAKu7c3NJBOtxa+gGWutpwkfERfvti7oY++DSQ=
+github.com/kovetskiy/lorg v0.0.0-20180923120717-7c1ee0acf180/go.mod h1:B8HeKAukXULNzWWsW5k/SQyDkiQZPn7lTBJDB46MZ9I=
+github.com/reconquest/cog v0.0.0-20180923130742-e74b28964b8e h1:5RYw+4Ek6ftLBubgJcAhpNCOitvYL8vWWu0EhMFsjvw=
+github.com/reconquest/cog v0.0.0-20180923130742-e74b28964b8e/go.mod h1:IYiTfZ8/UKTz5svWOy+2ri5NuS+pJ3ynXMg8V0IHkXU=
+github.com/reconquest/karma-go v0.0.0-20180810194150-79d0d637e9ff h1:99i1LHhu1kJH4ziS92tc6+0zxSIDyYZU+Zk2I6u/QyQ=
+github.com/reconquest/karma-go v0.0.0-20180810194150-79d0d637e9ff/go.mod h1:oTXKs9J7KQ1gCpnvSwCbH9vlvELZFfUSbEbrr2ABeo0=
+github.com/zazab/zhash v0.0.0-20170403032415-ad45b89afe7a h1:8gf6DUwu6F8Fh3rN8Ei9TM66KkWrNC04FP3HlcbxPuQ=
+github.com/zazab/zhash v0.0.0-20170403032415-ad45b89afe7a/go.mod h1:P+yVThXQrjx7yGmgsdI4WQ/XDDmcyBMZzK1b39TXteA=

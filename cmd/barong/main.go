@@ -7,27 +7,45 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/openware/barong/pkg/log"
+	"github.com/reconquest/karma-go"
 )
 
-func main() {
-	var args struct {
-		Listen string
-	}
+var (
+	// this variable is changed by runtime ldflags
+	version = "[manual build]"
+)
 
-	args.Listen = ":80"
-	arg.MustParse(&args)
+type args struct {
+	Listen string
+}
+
+func (args *args) Version() string {
+	return version
+}
+
+func main() {
+	args := &args{}
+	args.Listen = ":8080"
+	arg.MustParse(args)
 
 	router := chi.NewRouter()
 	handler := NewHandler()
 
 	setupRoutes(router, handler)
 
-	http.ListenAndServe(args.Listen, router)
+	log.Infof(
+		karma.Describe("address", args.Listen),
+		"starting listener",
+	)
+
+	err := http.ListenAndServe(args.Listen, router)
+	if err != nil {
+		log.Errorf(err, "unable to start listener at %s", args.Listen)
+	}
 }
 
 func setupRoutes(router chi.Router, handler *Handler) {
 	router.Use(middleware.RequestID)
-	router.Use(middleware.Logger)
 	router.Use(middleware.RequestLogger(&middleware.DefaultLogFormatter{
 		Logger: log.Logger,
 	}))

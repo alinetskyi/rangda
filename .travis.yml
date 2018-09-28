@@ -8,14 +8,9 @@ go:
 go_import_path: github.com/openware/barong
 
 env:
-  - GO_ENV=test
-    GO111MODULE=on
-
-before_script:
-  - mkdir -p $TRAVIS_BUILD_DIR/public/assets
-  - GO111MODULE=off go get github.com/gobuffalo/buffalo/buffalo
+  - GO111MODULE=on
 
 install: true
 
 script:
-  - buffalo test
+  - go build ./cmd/...

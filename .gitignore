@@ -1,14 +1,2 @@
-vendor/
-**/*.log
-**/*.sqlite
-.idea/
-bin/
-tmp/
-node_modules/
-.sass-cache/
-*-packr.go
-public/assets/
-barong
-.vscode/
-.grifter/
-.env
+/barong
+/cmd/barong/barong

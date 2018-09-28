@@ -5,7 +5,7 @@ language: go
 go:
   - 1.11.x
 
-go_import_path: github.com/openware/barong
+go_import_path: github.com/openware/rangda
 
 env:
   - GO111MODULE=on

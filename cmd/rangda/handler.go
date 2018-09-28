@@ -5,12 +5,12 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/openware/barong/pkg/log"
+	"github.com/openware/rangda/pkg/log"
 	"github.com/reconquest/karma-go"
 )
 
 const (
-	CookieSession = "_barong_session"
+	CookieSession = "_rangda_session"
 )
 
 type Handler struct {
@@ -29,6 +29,19 @@ func (handler *Handler) HandleAuth(
 		Describe("request_id", middleware.GetReqID(request.Context()))
 
 	log.Infof(context, "handling auth request")
+
+	cookie, err := request.Cookie(CookieSession)
+	if err != nil && err != http.ErrNoCookie {
+		log.Errorf(err, "unable to get session cookie: %s", CookieSession)
+		return
+	}
+
+	if err == http.ErrNoCookie {
+		// handle case when there is no cookie
+		return
+	}
+
+	log.Debugf(nil, "user's cookie: %s", cookie.Value)
 
 	writer.WriteHeader(http.StatusOK)
 }

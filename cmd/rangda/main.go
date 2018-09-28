@@ -6,7 +6,7 @@ import (
 	"github.com/alexflint/go-arg"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/openware/barong/pkg/log"
+	"github.com/openware/rangda/pkg/log"
 	"github.com/reconquest/karma-go"
 )
 
@@ -17,6 +17,7 @@ var (
 
 type args struct {
 	Listen string
+	Debug  bool
 }
 
 func (args *args) Version() string {
@@ -28,13 +29,17 @@ func main() {
 	args.Listen = ":8080"
 	arg.MustParse(args)
 
+	if args.Debug {
+		log.SetDebug(true)
+	}
+
 	router := chi.NewRouter()
 	handler := NewHandler()
 
 	setupRoutes(router, handler)
 
 	log.Infof(
-		karma.Describe("address", args.Listen),
+		karma.Describe("address", args.Listen).Describe("version", version),
 		"starting listener",
 	)
 

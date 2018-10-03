@@ -4,8 +4,6 @@ import (
 	"net/http"
 
 	"github.com/alexflint/go-arg"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
 	"github.com/openware/rangda/pkg/log"
 	"github.com/reconquest/karma-go"
 )
@@ -16,7 +14,7 @@ var (
 )
 
 type args struct {
-	Listen string
+	Config string
 	Debug  bool
 }
 
@@ -24,36 +22,42 @@ func (args *args) Version() string {
 	return version
 }
 
-func main() {
+func initArgs() *args {
 	args := &args{}
-	args.Listen = ":8080"
+
+	// Fill default values
+	args.Config = "rangda.conf"
+
 	arg.MustParse(args)
+
+	return args
+}
+
+func main() {
+	args := initArgs()
 
 	if args.Debug {
 		log.SetDebug(true)
 	}
 
-	router := chi.NewRouter()
-	handler := NewHandler()
+	config, err := LoadConfig(args.Config)
+	if err != nil {
+		log.Fatalf(err, "unable to load config: %s", args.Config)
+	}
 
-	setupRoutes(router, handler)
+	log.Infof(nil, "loaded configuration file: %s", args.Config)
+
+	server := NewServer(config)
+
+	server.SetupRoutes()
 
 	log.Infof(
-		karma.Describe("address", args.Listen).Describe("version", version),
+		karma.Describe("address", config.Address).Describe("version", version),
 		"starting listener",
 	)
 
-	err := http.ListenAndServe(args.Listen, router)
+	err = http.ListenAndServe(config.Address, server)
 	if err != nil {
-		log.Errorf(err, "unable to start listener at %s", args.Listen)
+		log.Errorf(err, "unable to start listener at %s", config.Address)
 	}
-}
-
-func setupRoutes(router chi.Router, handler *Handler) {
-	router.Use(middleware.RequestID)
-	router.Use(middleware.RequestLogger(&middleware.DefaultLogFormatter{
-		Logger: log.Logger,
-	}))
-
-	router.Get("/api/v1/auth", handler.HandleAuth)
 }
